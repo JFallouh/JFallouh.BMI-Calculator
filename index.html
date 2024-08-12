@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center my-4">BMI Calculator</h1>
+                
+                <!-- BMI Calculator Form -->
+                <form id="bmiForm" class="bg-white p-4 shadow-sm rounded">
+                    <div class="form-group">
+                        <label for="weight">Weight (kg):</label>
+                        <input type="number" class="form-control" id="weight" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Height (cm):</label>
+                        <input type="number" class="form-control" id="height" required>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block" onclick="calculateBMI()">Calculate BMI</button>
+                </form>
+
+                <p id="bmiResult" class="text-center font-weight-bold mt-4"></p>
+
+                <script>
+                    function calculateBMI() {
+                        var weight = document.getElementById("weight").value;
+                        var height = document.getElementById("height").value;
+                        if(weight > 0 && height > 0){   
+                            var bmi = (weight / ((height / 100) * (height / 100))).toFixed(2);
+                            document.getElementById("bmiResult").innerHTML = "Your BMI is: " + bmi;
+                        } else {
+                            document.getElementById("bmiResult").innerHTML = "Please enter valid values!";
+                        }
+                    }
+                </script>
+
+                <!-- Download CV Section -->
+                <div class="text-center my-5">
+                    <h2>If you like this project, feel free to download my CV:</h2>
+                    <a href="cv.pdf" class="btn btn-success mt-3" download>Download My CV</a>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white p-4 shadow-sm rounded">
+                    <h2 class="text-center">Contact Me</h2>
+                    <form action="https://formspree.io/f/xdknzyvv" method="POST">
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" name="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message:</label>
+                            <textarea class="form-control" name="message" id="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Send</button>
+                    </form>
+                </div>
+
+                <!-- Footer -->
+                <footer class="text-center mt-5">
+                    <p>Created by James Fallouh</p>
+                    <p><a href="https://jfallouh.github.io/JFallouh.github.my-CV/#english" target="_blank">Visit My Website</a></p>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
