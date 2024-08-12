@@ -3,31 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI Calculator</title>
+    <title>James Fallouh BMI Calculator</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts and Styles -->
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            scroll-behavior: smooth;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand {
+            color: #ffffff !important;
+            transition: color 0.3s ease;
+        }
+        .navbar-brand:hover {
+            color: #ffc107 !important;
+        }
+        .nav-link {
+            color: #ffffff !important;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #ffc107 !important;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+        .header h1:hover {
+            transform: scale(1.05);
+        }
+        .btn-primary, .btn-success {
+            background-color: #007bff;
+            border-color: #007bff;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .btn-primary:hover, .btn-success:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        .btn-download {
+            background-color: #28a745;
+            border-color: #28a745;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .btn-download:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        .highlight-link {
+            color: #dc3545;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .highlight-link:hover {
+            color: #c82333;
+            text-decoration: underline;
+        }
+        input:invalid {
+            border-color: #dc3545;
+        }
+        input:focus:invalid {
+            outline: none;
+            box-shadow: 0 0 10px #dc3545;
+        }
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body>
 
-    <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <a class="navbar-brand" href="#">James Fallouh BMI Calculator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#footer">About Me</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#calculator">BMI Calculator</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#download-cv">Download CV</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact Me</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <div class="header">
+        <h1>Welcome to James Fallouh BMI Calculator</h1>
+        <p>Calculate your Body Mass Index and explore more about me!</p>
+    </div>
+
+    <div class="container mt-5 pt-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <h1 class="text-center my-4">BMI Calculator</h1>
-                
-                <!-- BMI Calculator Form -->
-                <form id="bmiForm" class="bg-white p-4 shadow-sm rounded">
-                    <div class="form-group">
-                        <label for="weight">Weight (kg):</label>
-                        <input type="number" class="form-control" id="weight" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="height">Height (cm):</label>
-                        <input type="number" class="form-control" id="height" required>
-                    </div>
-                    <button type="button" class="btn btn-primary btn-block" onclick="calculateBMI()">Calculate BMI</button>
-                </form>
-
-                <p id="bmiResult" class="text-center font-weight-bold mt-4"></p>
+                <!-- BMI Calculator Section -->
+                <section id="calculator" class="my-5">
+                    <h2 class="text-center">BMI Calculator</h2>
+                    <form id="bmiForm" class="bg-white p-4 shadow-sm rounded" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <label for="weight">Weight (kg):</label>
+                            <input type="number" class="form-control" id="weight" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="height">Height (cm):</label>
+                            <input type="number" class="form-control" id="height" required>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block" onclick="calculateBMI()">Calculate BMI</button>
+                    </form>
+                    <p id="bmiResult" class="text-center font-weight-bold mt-4"></p>
+                </section>
 
                 <script>
                     function calculateBMI() {
@@ -40,16 +152,30 @@
                             document.getElementById("bmiResult").innerHTML = "Please enter valid values!";
                         }
                     }
+
+                    function validateForm() {
+                        var weight = document.getElementById("weight");
+                        var height = document.getElementById("height");
+                        
+                        if (weight.value <= 0) {
+                            weight.focus();
+                            return false;
+                        } else if (height.value <= 0) {
+                            height.focus();
+                            return false;
+                        }
+                        return true;
+                    }
                 </script>
 
                 <!-- Download CV Section -->
-                <div class="text-center my-5">
+                <section id="download-cv" class="text-center my-5">
                     <h2>If you like this project, feel free to download my CV:</h2>
-                    <a href="cv.pdf" class="btn btn-success mt-3" download>Download My CV</a>
-                </div>
+                    <a href="cv.pdf" class="btn btn-download mt-3" download>Download My CV</a>
+                </section>
 
-                <!-- Contact Form -->
-                <div class="bg-white p-4 shadow-sm rounded">
+                <!-- Contact Form Section -->
+                <section id="contact" class="bg-white p-4 shadow-sm rounded">
                     <h2 class="text-center">Contact Me</h2>
                     <form action="https://formspree.io/f/xdknzyvv" method="POST">
                         <div class="form-group">
@@ -62,16 +188,16 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Send</button>
                     </form>
-                </div>
-
-                <!-- Footer -->
-                <footer class="text-center mt-5">
-                    <p>Created by James Fallouh</p>
-                    <p><a href="https://jfallouh.github.io/JFallouh.github.my-CV/#english" target="_blank">Visit My Website</a></p>
-                </footer>
+                </section>
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="mt-5" id="footer">
+        <p>Created by James Fallouh</p>
+        <p><a href="https://jfallouh.github.io/JFallouh.github.my-CV/#english" class="highlight-link" target="_blank">Visit My Website</a></p>
+    </footer>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
